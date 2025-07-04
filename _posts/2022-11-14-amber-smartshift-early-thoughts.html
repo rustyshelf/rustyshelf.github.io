@@ -1,0 +1,49 @@
+---
+layout: post
+title: Amber SmartShift - Early Thoughts
+date: 2022-11-14 11:05:31.000000000 +10:30
+type: post
+parent_id: '0'
+published: true
+password: ''
+status: publish
+categories:
+- Rant
+tags: []
+permalink: "/2022/11/14/amber-smartshift-early-thoughts/"
+---
+<html><body>
+<p>For the three of you that read this blog, you'll know I've had an interest in renewable energy for a while now. From setting up solar on my roof, to adding battery storage to switching to an electric car. Each step in that journey I've learnt so much and I hope I've managed to share some of it here with you all. After adding battery storage to my solar setup, one thing always annoyed me, I had no way to export stored power from my batteries, to the grid. Well all that changed recently, enter a product called "SmartShift" from Australian energy retailer <a href="https://www.amber.com.au/solar-and-battery">Amber</a>.</p>
+<h2>The Promise</h2>
+<p>The promise of SmartShift is simple. You have solar that generates power, you have batteries to store that energy in and they are an energy retailer that lets you buy and sell power at the wholesale market rate. Not just that, but they have an algorithm that can look at the expected power prices for the day, and buy and sell power at all the right times to make you money. Push one button, and away you go:</p>
+<img src="{{site.baseurl}}/assets/2022/11/img_0164.png" width="410" height="253">
+<h2>First Run Experience</h2>
+<p>After turning SmartShift on, you get access to the "Devices" tab in the Amber app. This lets you see a summary of the stats for today, as well as a page that outlines the "plan" that SmartShift has generated for the day. This shows you an outline of what SmartShift thinks the upcoming power prices will be and what it plans to do and when. It's slightly confusing because there's no time shown on the graph, but it seems like it's for the next 12 hours or so. One the same page are some buttons for manually controlling your battery. All in all it makes a good first impression. The plans it made for the second and third day I had it on looked pretty much exactly like what I would have made myself.</p>
+<img src="{{site.baseurl}}/assets/2022/11/img_0168.png">
+<h2>Contact With The Enemy</h2>
+<p>Unfortunately, like most software developers know, no plan survives contact with the enemy. And in the case of SmartShift it soon became clear that the system could only ever be as good as the forecasts it was working on. The 3 important forecast being:</p>
+<ul>
+<li>How much solar are you likely to generate today?</li>
+<li>How much power are you likely to need, and when?</li>
+<li>What will the price of power be (for exporting and importing) for the next 12 hours?</li>
+<p>
+</ul>
+<p>On all 3 of these, SmartShift falls short. For the first month (or so I'm told by one of the engineers who worked on it) it uses a very crude solar and usage model that seems to be (as far as I can tell) "what happened yesterday". I watched this backfire rather spectacularly on a day that was forecast for storms all day, and 10-15mm of rain. Anyone reading that forecast would know solar generation would be down for the day. Sadly SmartShift had no idea, so it happily made a plan to buy some power overnight, sell it in the morning, to make way for the incoming solar power. Not only did it end up selling this power at a loss, but when I needed it later in the day I ended up having to buy it back from the grid at even higher prices. Perhaps after the first month when the app is meant to switch to a Machine Learning model that also takes into account forecast data some of this might be solved, but it resulted in the app making a string of really bad decisions I had to keep overriding.</p>
+<p>Then there's the forecast data for pricing. I'm sure that's a complicated thing to predict but this part is constantly wrong. The best algorithm in the world isn't going to be very effective with bad forecasting data, and that's precisely what SmartShift seems to be working with.</p>
+<p>I spent a rather frustrating Saturday manually telling it to buy and then hold onto power that I ended up turning it off. Don't get me wrong, I see the promise, but until the forecasts are better, the algorithm will make constant mistakes. Buying high, selling low, selling when it should be holding, and so on. That it summarises it for you is nice, but watching it buy power at 29c, only to sell it at 18c isn't fun.</p>
+<img src="{{site.baseurl}}/assets/2022/11/img_0187.jpg" width="512" height="462">
+<h2>TL;DR</h2>
+<p>SmartShift from Amber has a lot of promise but it doesn't, in my opinion and experience yet live up to the way it's being marketed. I suspect if you turned it on and just never opened the app it would be ok, but if like me you want to check in on it everyday, you're going to end up constantly disappointed by the decisions it's making. There is something here though, with better forecast data and more historic data from their user base it will hopefully improve over time. I intend to stick with it to see if it improves, but that's because I'm really excited about the prospect of it working. If you're switching to make money, you might end up disappointed.</p>
+<h2>Finishing Thoughts</h2>
+<p>My impressions are only a week old, and I can only speak for how this works in South Australia. Each state of Australia has different power pricing and tariffs that might make the calculus there different. For example from what I can see others are posting online it's far more reliable in Queensland. As a software developer I think I have slightly more insight into this than most, but I might have also made some bad assumptions and judged the system too early. Currently as it stands, I wouldn't recommend it to other people in South Australia just yet. YMMV in other states.</p>
+<p>If the usage and solar forecast model was better and it knew about the weather forecast, that would improve things a lot. If the future price forecast was more accurate, that would also make a huge difference. Those don't seem like impossible challenges, so they may well end up being things that get improved over time. I know Amber are actively working on both at the moment.</p>
+<p>And in case anyone at Amber is reading this, some suggestions on the app itself and things I'd like to see:</p>
+<ul>
+<li>I'd love to be able to tweak the algorithms plan for the day and maybe even add my own input to it. If it could list in tabular form what it plans to do and let me tweak some of it (don't buy here, sell here if the price is above $x, etc that would be very interesting. I get this is an advanced use case, and it should be hidden appropriately, but still.</li>
+<li>
+<s>There doesn't appear to be a button to pause SmartShift for a bit, you have to turn the entire thing off. It would great if you could just tell it to chill for an amount of time and have it turn back on automatically after that.</s> Edit: I'm a wally, that's what the "Consume Battery Energy" button in the manual control section does.</li>
+<li>When I choose a manual action (like charging my battery) and a timeframe, it would be nice to be able to extend that time if possible. Currently if you choose an hour, it ticks down to the hour and your only option to add time is to cancel that action, and add a new one.</li>
+<li>There is something off about the usability of the "Live" tab. I can't quite put my finger on it, but the way what's happening is shown is confusing (a simple animation might make a huge difference there?) and the way you tap on the little coloured boxes and they expand to fill the screen is a bit jarring (again an animation here might help).</li>
+</ul>
+<br />
+</body></html>

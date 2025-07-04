@@ -1,0 +1,108 @@
+---
+layout: post
+title: Thoughts on Swift, From an Idiot
+date: 2014-08-07 11:13:27.000000000 +09:30
+type: post
+parent_id: '0'
+published: true
+status: publish
+categories:
+- Rant
+tags: []
+permalink: "/2014/08/07/thoughts-on-swift-from-an-idiot/"
+---
+<html><body>
+<p>Swift (-taylor) is the exciting new language Apple debuted at WWDC in 2014. It took pretty much all of us in the developer community by surprise. We're now in August, 5 beta builds into Xcode and I feel like I've started to form an opinion about the language itself.</p>
+<p>First the good parts:</p>
+<ul>
+<li>It looks a million times cleaner than Objective-C code</li>
+<li>I won't miss the [square brackets]</li>
+<li>It's much nicer to read</li>
+<li>It has a lot of modern ideas and influences that make it a joy to write</li>
+<li>It's apparently fast, and only <a href="http://www.jessesquires.com/apples-to-apples-part-two/" target="_blank">getting faster</a>
+</li>
+</ul>
+<p>And that's where, for me, it ends. You see Apple sold me on the promise that this would solve my number one gripe about Objective-C: memory management issues. I had assumed my number two gripe, proper stack traces on crashes, was joining us for the ride. If you want to feel some of the pain that comes with Objective-C development, feel free to peruse this crash, from an older version of Pocket Casts:</p>
+<pre class="wrap ">Thread 0 Crashed:
+0   libsystem_kernel.dylib               0x000000019a38e58c __pthread_kill + 8
+1   libsystem_pthread.dylib              0x000000019a41116c pthread_kill + 100
+2   libsystem_c.dylib                    0x000000019a322808 abort + 108
+3   libsystem_malloc.dylib               0x000000019a3c85c4 nanozone_error + 292
+4   libsystem_malloc.dylib               0x000000019a3c8778 _nano_malloc_check_clear + 432
+5   libsystem_malloc.dylib               0x000000019a3c725c nano_malloc + 40
+6   libsystem_malloc.dylib               0x000000019a3b8368 malloc_zone_malloc + 92
+7   CoreFoundation                       0x000000018d68fd70 _CFRuntimeCreateInstance + 268
+8   CoreGraphics                         0x000000018d81c9dc CGTypeCreateInstance + 56
+9   CoreGraphics                         0x000000018d8262ec create_provider + 52
+10  CoreGraphics                         0x000000018d826284 CGDataProviderCreateDirect + 52
+11  CoreGraphics                         0x000000018d826228 CGDataProviderCreateWithCFData + 88
+12  CoreGraphics                         0x000000018d8261a4 CGDataProviderCreateWithCopyOfData + 364
+13  CoreGraphics                         0x000000018d825ee8 CGBitmapContextCreateImage + 84
+14  UIKit                                0x000000019076d038 _UIGraphicsGetImageFromCurrentImageContext + 196
+15  UIKit                                0x000000019076f830 -[UIImageView _setImageViewContents:] + 1244
+16  UIKit                                0x000000019076ede0 +[UIView(Animation) performWithoutAnimation:] + 84
+17  UIKit                                0x000000019076e748 -[UIImageView setImage:] + 836
+18  UIKit                                0x0000000190b128b8 -[UIButton _updateImageView] + 128
+19  UIKit                                0x00000001907b7e2c -[UIButton layoutSubviews] + 100
+20  UIKit                                0x000000019075afe0 -[UIView(CALayerDelegate) layoutSublayersOfLayer:] + 344
+21  QuartzCore                           0x000000019034c258 -[CALayer layoutSublayers] + 180
+22  QuartzCore                           0x0000000190346e20 CA::Layer::layout_if_needed(CA::Transaction*) + 296
+23  QuartzCore                           0x0000000190346cd8 CA::Layer::layout_and_display_if_needed(CA::Transaction*) + 28
+24  QuartzCore                           0x0000000190346560 CA::Context::commit_transaction(CA::Transaction*) + 276
+25  QuartzCore                           0x0000000190346304 CA::Transaction::commit() + 420
+26  QuartzCore                           0x000000019033fc38 CA::Transaction::observer_callback(__CFRunLoopObserver*, unsigned long, void*) + 76
+27  CoreFoundation                       0x000000018d757858 __CFRUNLOOP_IS_CALLING_OUT_TO_AN_OBSERVER_CALLBACK_FUNCTION__ + 28
+28  CoreFoundation                       0x000000018d754ae0 __CFRunLoopDoObservers + 368
+29  CoreFoundation                       0x000000018d754e6c __CFRunLoopRun + 760
+30  CoreFoundation                       0x000000018d695dd0 CFRunLoopRunSpecific + 448
+31  GraphicsServices                     0x000000019337dc0c GSEventRunModal + 164
+32  UIKit                                0x00000001907c6fc4 UIApplicationMain + 1152
+33  podcasts                             0x000000010004e9b4 _mh_execute_header (main.m:14)
+34  libdyld.dylib                        0x000000019a293aa0 start + 0</pre>
+<p>Looks very detailed right? So as an app developer you get that back, and now it's your job to figure out why. The first thing you look for is your app's line numbers, so you can follow the execution path. Our app executable is called 'podcasts' and we can see it's in main.m, line 14. Now most Objective-C developers have already skipped ahead and know where this is going, but indulge me. Here's line 14:</p>
+<pre>return UIApplicationMain(argc, argv, nil, NSStringFromClass([SJAppDelegate class]));</pre>
+<p>Oh...it's the line our app was launched from, and doesn't really bare any resemblance to where the crash actually started from. What button did the user press? Which screen where they on? There's no way to know. Now before you email me, I know exactly why it's like that. I've put up with it for many years. Currently in Swift, those stack traces are even worse. I won't post one until they actually release it to be fair to Apple...but why oh why when they were making a 'modern' programming language could they not solve this? I know, the Objective-C runtime is hailed by many the world over as being fast, and awesome. But it's 2014, the things I actually care about are the problems Microsoft and Sun Microsystems solved, memory management and reliability. If it comes at the expense of a tiny amount of speed, I'll happily take it. I can count the amount of times on no hands that my code was running slow, and it was the languages fault. That goes for Java, Objective-C, C#, C++, Ruby and so many other languages. Don't get me wrong, I love more speed, but give me more reliability first.</p>
+<p>Update: Someone on Twitter wanted to be clever and pick apart the actual stack trace I posted. It was an example kids. But here's a more specific one:</p>
+<pre>Thread 0 Crashed:
+0   libobjc.A.dylib                      0x3a6f7626 objc_msgSend + 6
+1   CoreFoundation                       0x2ff14f01 __CFNOTIFICATIONCENTER_IS_CALLING_OUT_TO_AN_OBSERVER__ + 10
+2   CoreFoundation                       0x2fe88d69 _CFXNotificationPost + 1718
+3   Foundation                           0x30874cc5 -[NSNotificationCenter postNotificationName:object:userInfo:] + 70
+4   UIKit                                0x329e545f -[UIApplication _sendWillEnterForegroundCallbacks] + 152
+5   UIKit                                0x3298a949 -[UIApplication _handleApplicationResumeEvent:] + 1146
+6   UIKit                                0x327895f3 -[UIApplication handleEvent:withNewEvent:] + 1880
+7   UIKit                                0x32788dd9 -[UIApplication sendEvent:] + 70
+8   UIKit                                0x327ed3e5 _UIApplicationHandleEvent + 614
+9   GraphicsServices                     0x34df6b55 _PurpleEventCallback + 606
+10  GraphicsServices                     0x34df673f PurpleEventCallback + 32
+11  CoreFoundation                       0x2ff1d807 __CFRUNLOOP_IS_CALLING_OUT_TO_A_SOURCE1_PERFORM_FUNCTION__ + 32
+12  CoreFoundation                       0x2ff1d7a3 __CFRunLoopDoSource1 + 344
+13  CoreFoundation                       0x2ff1bf6f __CFRunLoopRun + 1404
+14  CoreFoundation                       0x2fe86729 CFRunLoopRunSpecific + 522
+15  CoreFoundation                       0x2fe8650b CFRunLoopRunInMode + 104
+16  GraphicsServices                     0x34df56d3 GSEventRunModal + 136
+17  UIKit                                0x327e7871 UIApplicationMain + 1134
+18  podcasts                             0x000851cf main (main.m:14)
+19  libdyld.dylib                        0x3abebab7 start + 0
+</pre>
+<p>I know the cause of this. I forgot to call removeObserver somewhere. But where? Damned if I know unless I give every single one of my methods unique names. Pointers are fun. My point is, a language/framework/runtime combination that is modern, should remove that guesswork.</p>
+<p>As much as people hate Java, and to some extent I'm in that camp too, here's an equivalent crash from our Android app:</p>
+<pre class="wrap ">java.lang.NullPointerException
+	at au.com.shiftyjelly.pocketcasts.PodcastDialog.addToPodcastLibrary(PodcastDialog.java:465)
+	at au.com.shiftyjelly.pocketcasts.PodcastDialog.subscribeToPodcast(PodcastDialog.java:257)
+	at au.com.shiftyjelly.pocketcasts.PodcastDialog.access$400(PodcastDialog.java:48)
+	at au.com.shiftyjelly.pocketcasts.PodcastDialog$2.onClick(PodcastDialog.java:201)
+	at android.view.View.performClick(View.java:4438)
+	at android.view.View$PerformClick.run(View.java:18422)
+	at android.os.Handler.handleCallback(Handler.java:733)
+	at android.os.Handler.dispatchMessage(Handler.java:95)
+	at android.os.Looper.loop(Looper.java:136)
+	at android.app.ActivityThread.main(ActivityThread.java:5001)
+	at java.lang.reflect.Method.invokeNative(Native Method)
+	at java.lang.reflect.Method.invoke(Method.java:515)
+	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:785)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:601)
+	at dalvik.system.NativeStart.main(Native Method)</pre>
+<p>Yes I know, ha ha Null Pointer, Java, LOL. But that's an exact line number friends. What did the user do? They tapped the subscribe button. Which page where they on? The Podcast Dialog. Zero ambiguity. Guess how many of our Android crashes we get that for? 100%. In iOS we'd be lucky if even 30% of our crashes had stack traces we can line up to actual things we can then reproduce. So most iOS crashes today involve me becoming House MD and poking the code for hours, only to figure out that like always, it's never Lupus.</p>
+<p>I haven't even covered the crashes I've seen where Objective-C was sending a message to the wrong object, a classic sign that the object you thought you had has been released and you're now talking to something completely different. I'm assuming that Swift, running on the same runtime, with the same compiler, is going to have that exact same issue. I also haven't gone into how the entire Cocoa/Cocoa Touch API is built for Objective-C and is still at times awkward to interact with in Swift. That one at least feels like mostly a transitional issue. So count me disappointed until the day Apple announce a new runtime that actually gets rid of memory related crashes, and gives us accurate stack traces. Until that day, old man Rusty is just going to keep yelling "get off my lawn, kiddo's".</p>
+</body></html>

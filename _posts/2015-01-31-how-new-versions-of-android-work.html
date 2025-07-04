@@ -1,0 +1,30 @@
+---
+layout: post
+title: How New Versions of Android Work
+date: 2015-01-31 11:00:33.000000000 +10:30
+type: post
+parent_id: '0'
+published: true
+status: publish
+categories:
+- Rant
+tags: []
+permalink: "/2015/01/31/how-new-versions-of-android-work/"
+---
+<html><body>
+<p>I see a lot of confusion, and to be honest ridicule, from iOS Developers when it comes to new Android versions. In iOS when Apple release v8, all the supported devices get it on day 1. In most cases this is great for developers, because sales go up thanks to people looking for apps that support all the new whiz-bang features.</p>
+<p>Android is different. When version 5.0 of Android comes out, it's the AOSP (Android Open Source Project) version, that manufacturers use as a base for building their own custom versions of it. HTC, Samsung, LG, Motorola et al need to add their own drivers &amp; firmware as well as supporting all the various functions they've built on top of Android. Google is always the first to ship a version of it, for its Nexus Devices. This is why I recommend all developers buy Nexus phones for testing. You'll get the new releases first, and sometimes pre-release builds as well.</p>
+<p>The above is why you look silly when you poke fun at Android adoption numbers. For the majority of phones, big new versions of Android ship roughly 3 months after the AOSP release. Here for example are the numbers from early January:</p>
+<p><img src="{{site.baseurl}}/assets/2015/01/screen-shot-2015-01-31-at-10-25-14-am.png"width="800"></a></p>
+<p>People are often quick to mis-interpret these numbers. "iOS 8 adoption is at 64%, but Android 4.4, a version that's years old isn't even at that!". There's two things wrong with these kinds of comments. Firstly there are roughly 6-8x more Android devices than iOS devices in the world, depending on which market share numbers you use. This means that if a version of Android achieves 39% adoption, that's a huge deal, and you could develop just for that platform and address a larger user base than targeting iOS 8 with its 64%. Secondly people confuse overall numbers, with actual numbers of people who buy apps. Here for example are the version breakdowns of people who buy Pocket Casts on Android:</p>
+<p><img src="{{site.baseurl}}/assets/2015/01/pc_numbers.png" width="800"></a></p>
+<p>So while Android 5.0 has less than 1% adoption in the overall Android eco-system, 23% of our customers already run it. This makes sense when you put a bit of thought into these numbers. People that have the money to buy apps, and are passionate about Android, have up to date phones. While some users who run Android 2.3 on their 5 year old phone might be perfectly happy, they probably weren't ever going to buy Pocket Casts. It's also worth noting that Pocket Casts sells in much larger volumes (and makes more revenue) than any numbers I've seen for an equivalent iOS app. We've slowly moved our minimum version from 2.3, to 4.0, to 4.1 and it hasn't hurt sales at all.</p>
+<p>My last point is one very few iOS Developers actually know about. In iOS if your users want to take an advantage of a feature in iOS 8, they have to have iOS 8 installed. In Android this isn't always the case. Google bundles features into two libraries: 'Support' and 'Google Play Services'. Google Play Services is updated through the store, so it's not tied to the version of the OS you have installed. The Support library is shipped by app developers inside their apps, and is updated regularly by Google. When a new version of Android ships, you'll often find a lot of the new APIs appear in one of these two libraries, and not the core of Android itself. This isn't the case for every API, but more often than not you can give your users on older platforms access to newer features, without waiting for them to update. Even when newer features can't be brought to older versions, Google will often place 'compatibility APIs' into the Support library, so you don't have to litter your app with runtime checks of which version you're running on. It's not a silver bullet, but backwards compatibility is far less of a headache on Android than it is on iOS.</p>
+<p>TL;DR:</p>
+<ul>
+<li>There is no 'day' a major new version of Android comes out. Each set of phones have their own launch day. Nexus devices, then Motorola/LG devices, then HTC and Samsung devices. So it's only useful to think about adoption numbers for a new version of Android after the last of those manufacturers ships their updates.</li>
+<li>Overall Android adoption numbers should be ignored by most developers, look up the ones for the category you plan to launch in. They are available in the Google Play Developer Console.</li>
+<li>Ongoing revenue on Android tends to be a lot higher and steadier than iOS, and you don't get spikes caused by new Android versions being released.</li>
+<li>If you're making a new app, targeting Android 4.1 and above will get you the most users. Targeting 5.0 only is probably not wise as of today, but will be in a few months time. 4.4 is also a perfectly acceptable minimum for an app you plan to release regular updates for.</li>
+</ul>
+</body></html>

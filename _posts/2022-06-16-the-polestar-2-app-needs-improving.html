@@ -1,0 +1,105 @@
+---
+layout: post
+title: The Polestar 2 App Needs Improving
+date: 2022-06-16 10:52:37.000000000 +09:30
+type: post
+published: true
+status: publish
+categories:
+- Rant
+tags: []
+permalink: "/2022/06/16/the-polestar-2-app-needs-improving/"
+---
+<html><body>
+<p>One of the most surprising things to me about owning a modern car with its own cell radio built in, is how this opens up opportunities for useful and interesting things car makers can do in their apps. Where on earth did I park my car? My kid needs to get their jacket from the boot. How fast is my car charging and when will it be done? It's sooo hot, I should turn on the air con before we head out. It's sooo cold, I should pre-heat the car before we leave. Did I lock the car?! This is one place the Tesla app really shines. It gives you quick access to controls like lock/unlock, opening the boot, charging info, climate and so much more. The Polestar app on the other hand...well...it needs work. I'm writing this post in the hope that someone at Polestar reads it, and improves it. Or, alternatively make the API open and developers like myself will happily make a better app if the constraints you're working under don't allow it.</p>
+<h2>Refreshing</h2>
+<p>The Polestar 2 app is very striking in its design language, which I don't mind. When you open it, you're presented with something like this:</p>
+<div>
+<img src="{{site.baseurl}}/assets/2022/06/img_3191.png" width="300">
+<img src="{{site.baseurl}}/assets/2022/06/img_3192-1.png" width="300">
+</div>
+<p>At first glance you might think that's amazing! Battery percentage, climate, doors, yay! The issue is you have no idea how old this data is. The app doesn't tell you. I frequently open it and see 67%, only to have that replaced with 47% at what feels like some arbitrary point in the future. Sometimes it pops up messages to let you know it failed to refresh, other times it starts flashing (changing the alpha value of the displayed content from 100% to about 30% in a rhythmic way) either the whole app, or bits of it. Not knowing how up to date this information is, if it's loading or not and sometimes just watching the entire app flashing for minutes on end isn't a great experience. Here's some quick ways to fix that:</p>
+<ul>
+<li>Remove the flashing as an indicator the app is refreshing. It's cute, but as a user it took me ages to figure out that's what it even means. We have decades of learned experiences about what something that's updating looks like, no need to re-invent that. Add a simple bit of text "Last updated 4 hours ago" and put a little refresh indicator next to it. That way a person instantly knows how old the data is, and that you're trying to update it.</li>
+<li>Fix whatever the issue is that causes the app not to load half the time. It seems like it sometimes tries to refresh in the background, and when that fails you open to an app that's out of date, full of error messages and you have to kill the app to get it to load.</li>
+<li>Related to the above, make the app and the back end service it connects to faster and more reliable. I should be able to depend on it working, not vaguely hope it does every time I open it. It's ok if it takes time to wake the car up and other things like that, I don't want the laws of physics broken, just make it reliable.</li>
+</ul>
+<h2>Layout</h2>
+<p>Next up, let's talk about some of the layout issues the app has:</p>
+<div>
+<img src="{{site.baseurl}}/assets/2022/06/img_3195.png" width="200">
+<img src="{{site.baseurl}}/assets/2022/06/img_3193.png" width="200">
+<img src="{{site.baseurl}}/assets/2022/06/img_3194.png" width="200">
+</div>
+<p>The four tabs across the bottom are : car info, news, shop and account. To my thinking at least two of these aren't needed. I already own the Polestar...am I really going to use the app to buy another one?! I'd remove this tab bar entirely and just have the app open to car info. Have the account info and news as buttons in the app somewhere, they don't need dedicated tabs. Remove the shop entirely, or let people shop for accessories for their car instead of new cars as the default.</p>
+<p>Next up when I tap on the already giant "Doors" button in the app, I'm taken to an entire page with an even bigger button. Is that really necessary? The animation for the page opening is nice, but I don't really need a giant picture of my car with an unlock button, why not just let me do that from the base page? I have very similar thoughts about the climate page, give me a quick way to turn climate on and off, and then also give me a way to get to more detailed settings for it.</p>
+<p><strong>Update 17th June 2022:</strong> A few people let me know that the little lock and fan icons on the Doors and Climate buttons are actually buttons themselves! This is great, it means there is a quick way to do those actions, but also that means that Polestar has put a button inside a button...which is not great in terms of discoverability or usability.</p>
+<h2>Charging</h2>
+<p>Next up is something you're going to be doing a lot with an electric car, charging! I think Tesla (layout and text sizes aside) has really nailed this interface. Let's look at them side by side (charging at the same time, from two identical side by side chargers):</p>
+<div>
+<img src="{{site.baseurl}}/assets/2022/06/img_3164.jpeg" width="300">
+<img src="{{site.baseurl}}/assets/2022/06/img_3163.png" width="300">
+</div>
+<p>Let's break down all the things they show and can do:</p>
+<table>
+<tbody>
+<tr>
+<td><strong>Function</strong></td>
+<td class="has-text-align-center" data-align="center">   <strong>Tesla</strong>   </td>
+<td class="has-text-align-center" data-align="center"> <strong>Polestar</strong> </td>
+</tr>
+<tr>
+<td>How long left until the car is charged to the limit I've set</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+</tr>
+<tr>
+<td>How fast the car is charging, in kW as well as information about the amperage and voltage</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">❌</td>
+</tr>
+<tr>
+<td>Start and stop charging</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">❌</td>
+</tr>
+<tr>
+<td>Unlock charge port</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">❌</td>
+</tr>
+<tr>
+<td>Change the charging limit</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">❌</td>
+</tr>
+<tr>
+<td>Change the charging rate</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+</tr>
+<tr>
+<td>Notification when charging completes</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">❌</td>
+</tr>
+<tr>
+<td>Notification when fast charging is almost complete</td>
+<td class="has-text-align-center" data-align="center">✅</td>
+<td class="has-text-align-center" data-align="center">❌</td>
+</tr>
+</tbody>
+</table>
+<p>I've found I've used almost all of these at some point during my charging journeys. Let's talk a bit about the ones the Polestar app is missing:</p>
+<ul>
+<li>Being able to see how fast the car is charging: you plugged into what you thought was a 12kW 3 phase AC charger and are only getting 4kW...maybe you need to try a different port or adjust something. Or if you're adjusting the charging rate, you can see the effect that has on the amount of kW the car is charging at. All of this info is available on the driver screen inside the car, but it would be handy to have in the app as well.</li>
+<li>Start and stop charging: I use this a lot at home when I'm charging off solar. I'll leave the car plugged in, and then when I see solar generation is really high and my home battery is full, I'll tap the start charging button. Ditto for stop charging.</li>
+<li>Unlock charge port: the Polestar has a dedicated button for this next to the charge port, so I don't particularly need or miss that function in the app. If anything this is a more sensible place to have this feature.</li>
+<li>Change the charging limit: it's a bit bizarre the app is missing this. What charge will I end up with? What if I set the limit wrong weeks ago and forgot?</li>
+<li>Notification when charging completes and when a fast charge is almost done: I've never seen either of these (and I don't think the Polestar app ever asked for notification permission) so I'm 97% sure they aren't there. These are really handy when you're at a public charger and need a prod for when it's time to come back and move your car.</li>
+</ul>
+<p>Additionally it's nice the Polestar app allows you to set a charge rate limit (useful mainly for home charging) but it's slightly odd that unlike the Tesla app this isn't shown in context. If you have a 25A capable charger, nothing in the app shows you that while it's charging. The Tesla app does a better job of putting this in context, as when you dial it back you'll see something like "20A/25A" which is very useful. You can see the maximum is 25A, and that the car is currently charging at 20A. That kind of context would be really handy in the Polestar app as well. At the moment I can see a lot of people being confused by "Set Amperage Limit" with no other context about what that is or what it might be sensible to set it at.</p>
+<h2>Final Thoughts</h2>
+<p>The Polestar app needs work, however it's great that it exists. When it's working, being able to find your car, pre-heat or pre-cool it and lock and unlock it are all useful functions. If Polestar can make it connect more reliably that in itself would be a big win. I would really love them to expand and improve the charging screen though, as once you've had access to all the features the Tesla app has, it's hard to go back to something less capable. I suspect all this info is available (or can be made available) via the API, so I hope that's something that can come in a future app update.</p>
+<br />
+</body></html>

@@ -3,16 +3,11 @@ layout: page
 title: About
 permalink: /about/
 ---
+I'm Russell. I make stuff. Why all the questions?
+I joke around here: [Mastodon](https://mastodon.social/@rustyshelf)
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+I work here: [Bjango](https://bjango.com/)
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
+You clicked here: [well actually here](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
 
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
-
-
-[jekyll-organization]: https://github.com/jekyll
+Why?

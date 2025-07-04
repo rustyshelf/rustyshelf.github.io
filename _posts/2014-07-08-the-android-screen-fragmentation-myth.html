@@ -1,0 +1,45 @@
+---
+layout: post
+title: The Android Screen Fragmentation Myth
+date: 2014-07-08 07:50:54.000000000 +09:30
+type: post
+parent_id: '0'
+published: true
+status: publish
+categories:
+- Rant
+tags: []
+permalink: "/2014/07/08/the-android-screen-fragmentation-myth/"
+---
+<html><body>
+<p>As someone who develops for Android and iOS I get asked the same question over and over again by people: "Is developing for Android screens a huge pain? How on earth do you cope with the thousands of screen sizes available?". Occasionally, they point me to infographics like this one courtesy of <a href="http://opensignal.com/reports/fragmentation-2013/" target="_blank">OpenSignal</a> showing screen size fragmentation on Android in 2013:</p>
+<p><img src="{{site.baseurl}}/assets/2014/07/screen-shot-2014-07-05-at-4-41-04-pm.png" width="800"></p>
+<p>The answer tends to surprise pretty much everyone: It's not that hard, and honestly causes us less headaches than most people imagine. Firstly, the tools Google give us to lay out interfaces have supported this from day one. You've been able to define one or more layouts that scale to various sizes, and if you want to get everything perfect, you can have as many of these layouts as you like, while still keeping the one codebase. The layouts are XML, and don't live in your code. If you're an iOS developer they are pretty much the equivalent of XIB files with size classes like iOS 8. The other part people don't realise is that Android has standardised on screen resolutions for a long time now. To give you a sample, I chose the top 10 most popular phones from our Pocket Casts stats, and added the LG G3 with its crazy new resolution:</p>
+<blockquote><p>LG G3: 1440x2560<br />
+Nexus 5: 1080x1920<br />
+Galaxy S5: 1080x1920<br />
+Galaxy S4: 1080x1920<br />
+Galaxy S3: 720x1280<br />
+Galaxy Note 3: 1080x1920<br />
+Galaxy Note: 800x1280<br />
+HTC One M8: 1080x1920<br />
+HTC One M7: 1080x1920<br />
+Nexus 4: 768x1280<br />
+Moto X: 720x1280</p></blockquote>
+<p>Seems like a lot of variation, right? The part that might confuse most non-developers, is we lay everything out at '1x' or '1dp'. So on the iPhone you can have a 320x480 pixel iPhone 3G, and a 640x960 iPhone 4, but the interface itself doesn't change, it's still 320x480. You don't have to re-lay out any buttons or do a custom interface for it. All you do is provide higher resolution assets to make things look crisper. The same is true on Android. Take the above devices, and break them down into their 1x/1dp forms:</p>
+<blockquote><p>LG G3 @ 1x: 360x640<br />
+Nexus 5 @ 1x: 360x640<br />
+Galaxy S5 @ 1x: 360x640<br />
+Galaxy S4 @ 1x: 360x640<br />
+Galaxy S3 @ 1x: 360x640<br />
+Galaxy Note 3 @ 1x: 360x640<br />
+Galaxy Note @ 1x: 400x640<br />
+HTC One M7 @ 1x: 360x640<br />
+HTC One M8 @ 1x: 360x640<br />
+Nexus 4 @ 1x: 384x640<br />
+Moto X @ 1x: 360x640</p></blockquote>
+<p>There's no voodoo here, once you break things down into how you'd actually lay them out, there aren't that many variations. There's a slight variation in width, and there is in height as well, since some devices have software buttons that take up space on your physical screen. In Android 4.4 and above you can include these buttons into your interface, but for simplicity let's just assume they take up that bottom space. So let's redraw that commonly circulated diagram in terms of actual screen resolutions we design for on Android:</p>
+<p><img src="{{site.baseurl}}/assets/2014/07/screen_res.png" width="402"></p>
+<p>The above are literally all the phone sizes we test, support and deploy on. There are of course other phone resolutions and aspect ratios out there, and in the early days of Android there was a lot more experimentation going on with these. For modern apps like ours though, which support Android 4.0 and above, the landscape is much nicer. That's the beauty of Android's massive market share, we can ignore all the people with phones running Android 2.3, those with odd and rare screen sizes, and target only 4.0 and above. The resulting group of people is comparable, if not bigger, than the users we target by being iOS 7 only in our iOS apps.</p>
+<p>Don't get me wrong, fragmentation certainly exists in Android, but screen resolutions and sizes are not the main issue. The above diagram and analysis also only take into account phones, not tablets, where designing for physical screen size becomes more important than resolution.</p>
+</body></html>

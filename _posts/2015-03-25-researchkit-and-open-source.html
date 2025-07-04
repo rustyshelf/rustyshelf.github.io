@@ -1,0 +1,29 @@
+---
+layout: post
+title: ResearchKit and Open Source
+date: 2015-03-25 20:00:11.000000000 +10:30
+type: post
+parent_id: '0'
+published: true
+status: publish
+categories:
+- Rant
+tags: []
+permalink: "/2015/03/25/researchkit-and-open-source/"
+---
+<html><body>
+<p>As part of their March 9th event, Apple introduced a new framework called 'ResearchKit'. I've read a lot of glowing articles about it since, but one thing really bothered me. A lot of these articles sight it being 'open source' as proof that this is something truly altruistic that Cupertino is working on for the social good. I've talked to a lot of people since the launch, and the problem is no one seems to know exactly what parts of it are open source, or even what it does. Are the 5 iOS apps built to date open source? Is the data in an open format? Is it the server part that's open source?</p>
+<p>Let's start with the question "Have Apple developed an open format for exchanging medical data between apps and servers?". The answer lies in a technical overview document Apple published <a href="https://developer.apple.com/researchkit/researchkit-technical-overview.pdf" target="_blank">here</a>:</p>
+<blockquote><p>Keep in mind that ResearchKit currently doesn’t include:</p>
+<ul>
+<li>A defined data format for how ResearchKit structured data is serialized. All ResearchKit objects support NSSecureCoding, and sample code exists outside the framework for serializing them to JSON.</li>
+</ul>
+</blockquote>
+<p>For the non-technical among us, that's a no. Apple hasn't defined a standard format, but they may in the future.</p>
+<p>So what about the server infrastructure required to receive and store ResearchKit data? That also appears to be a no. On Apple's future todo list is "Secure communication mechanisms between your app and your server". Even that suggests that you'll still need your own server. <a href="http://www.pcworld.com/article/2895552/first-medical-apps-built-with-apples-researchkit-wont-share-data-for-commercial-gain.html" target="_blank">This article</a> seems to suggest that in its current form 'Sage Bionetworks' is running some of the servers for data collection, on the Amazon AWS platform. Is the code they are writing open source, or are they one of many collection providers that can be used? The answer to that seems unclear.</p>
+<p>So what about the 5 apps written to date, are they open source? I couldn't find an answer to that one, but the same technical document referenced above does outline a bit about how you build a ResearchKit app:</p>
+<p><img src="{{site.baseurl}}/assets/2015/03/screen-shot-2015-03-22-at-11-03-32-am.png" width="660"></p>
+<p>This seems to indicate that ResearchKit, just like most other iOS frameworks is a set of tools for building an iOS app that simplifies some of the things you'd need to do to collect patient data. The intention of open sourcing this part of it seems to be to encourage developers to build modules for it which would all be iOS only as well. Apple states as much in their technical document:</p>
+<blockquote><p>...developers are encouraged to build new modules and share them with the community</p></blockquote>
+<p>So, currently at least, there's no open source server components, no open format for exchanging data and an iOS only open source framework that Apple want developers to build modules for. Don't get me wrong, this still sounds like a huge step forward for medical research data collection. What it doesn't sound like though is Apple's altruistic gift to the world from which they receive no benefits. They benefit by selling more iPhones, either directly to researchers or through positive marketing associated with this endeavour. That's not a bad reason to do something, especially if you're a company, but it does mean ResearchKit might not be the cross-platform neutral playground that the term 'open source' conjures up</p>
+.</body></html>
