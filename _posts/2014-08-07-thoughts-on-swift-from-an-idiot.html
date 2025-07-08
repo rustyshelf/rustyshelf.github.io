@@ -5,7 +5,6 @@ date: 2014-08-07 11:13:27.000000000 +09:30
 type: post
 permalink: "/2014/08/07/thoughts-on-swift-from-an-idiot/"
 ---
-<html><body>
 <p>Swift (-taylor) is the exciting new language Apple debuted at WWDC in 2014. It took pretty much all of us in the developer community by surprise. We're now in August, 5 beta builds into Xcode and I feel like I've started to form an opinion about the language itself.</p>
 <p>First the good parts:</p>
 <ul>
@@ -99,4 +98,3 @@ permalink: "/2014/08/07/thoughts-on-swift-from-an-idiot/"
 	at dalvik.system.NativeStart.main(Native Method)</pre>
 <p>Yes I know, ha ha Null Pointer, Java, LOL. But that's an exact line number friends. What did the user do? They tapped the subscribe button. Which page where they on? The Podcast Dialog. Zero ambiguity. Guess how many of our Android crashes we get that for? 100%. In iOS we'd be lucky if even 30% of our crashes had stack traces we can line up to actual things we can then reproduce. So most iOS crashes today involve me becoming House MD and poking the code for hours, only to figure out that like always, it's never Lupus.</p>
 <p>I haven't even covered the crashes I've seen where Objective-C was sending a message to the wrong object, a classic sign that the object you thought you had has been released and you're now talking to something completely different. I'm assuming that Swift, running on the same runtime, with the same compiler, is going to have that exact same issue. I also haven't gone into how the entire Cocoa/Cocoa Touch API is built for Objective-C and is still at times awkward to interact with in Swift. That one at least feels like mostly a transitional issue. So count me disappointed until the day Apple announce a new runtime that actually gets rid of memory related crashes, and gives us accurate stack traces. Until that day, old man Rusty is just going to keep yelling "get off my lawn, kiddo's".</p>
-</body></html>
